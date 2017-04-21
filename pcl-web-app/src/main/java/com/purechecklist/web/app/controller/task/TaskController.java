@@ -27,10 +27,11 @@ public class TaskController {
         this.commandGateway = commandGateway;
         this.commandBus = commandBus;
     }
+
     @ResponseStatus(HttpStatus.ACCEPTED)
     @RequestMapping(value = "task", method = RequestMethod.POST)
     public void createTask(@RequestBody TaskRequest task) {
         commandGateway.send(new CreateTaskCommand(UUID.randomUUID(), task.getListUuid(), task.getText(), task.isCompleted()));
-        commandBus.dispatch(asCommandMessage(new CreateTaskCommand(UUID.randomUUID(), task.getListUuid(), task.getText(), task.isCompleted())));
+//        commandBus.dispatch(asCommandMessage(new CreateTaskCommand(UUID.randomUUID(), task.getListUuid(), task.getText(), task.isCompleted())));
     }
 }
